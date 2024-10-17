@@ -3,4 +3,4 @@ This tool allows you to filter the results of Gophish when an email security sol
 
 # To-do
 
-- [] Export results in a csv file
+- [ ] Export results in a csv file
