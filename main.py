@@ -11,6 +11,7 @@ email_reported = []
 parser = argparse.ArgumentParser()
 parser.add_argument("file")
 parser.add_argument("-f", "--filter", action="store_true")
+parser.add_argument("-o", "--output")
 
 
 def get_data_from_file(file):
@@ -85,6 +86,39 @@ def print_campaign_results():
     print(f"Email Reported: {len(email_reported)}")
 
 
+def get_data_from_index(index, data_list):
+    if len(data_list) - 1 < index:
+        return ""
+    else:
+        return data_list[index]
+
+
+def export_data_to_csv(output_file):
+    global email_sent
+    global email_opened
+    global clicked_link
+    global submitted_data
+    global email_reported
+
+    with open(output_file, "w") as csv_file:
+        fieldnames = ["Email Sent", "Email Opened", "Clicked Link", "Submitted Data", "Email Reported"]
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer.writeheader()
+        
+        for index in range(0, len(email_sent)):
+            email_sent_col = email_sent[0]
+            email_opened_col = get_data_from_index(index, email_opened)
+            clicked_link_col = get_data_from_index(index, clicked_link)
+            submitted_data_col = get_data_from_index(index, submitted_data)
+            email_reported_col = get_data_from_index(index, email_reported)
+
+            writer.writerow({"Email Sent": email_sent_col,
+                             "Email Opened": email_opened_col,
+                             "Clicked Link": clicked_link_col,
+                             "Submitted Data": submitted_data,
+                             "Email Reported": email_reported_col})
+
+
 def main():
     args = parser.parse_args()
 
@@ -93,6 +127,9 @@ def main():
     analyse_results(args.filter)
 
     print_campaign_results()
+
+    if args.output:
+        export_data_to_csv(args.output)
 
 
 if __name__ == "__main__":
