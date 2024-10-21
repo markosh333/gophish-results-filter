@@ -106,7 +106,7 @@ def export_data_to_csv(output_file):
         writer.writeheader()
         
         for index in range(0, len(email_sent)):
-            email_sent_col = email_sent[0]
+            email_sent_col = email_sent[index]
             email_opened_col = get_data_from_index(index, email_opened)
             clicked_link_col = get_data_from_index(index, clicked_link)
             submitted_data_col = get_data_from_index(index, submitted_data)
