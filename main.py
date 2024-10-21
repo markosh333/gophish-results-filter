@@ -115,7 +115,7 @@ def export_data_to_csv(output_file):
             writer.writerow({"Email Sent": email_sent_col,
                              "Email Opened": email_opened_col,
                              "Clicked Link": clicked_link_col,
-                             "Submitted Data": submitted_data,
+                             "Submitted Data": submitted_data_col,
                              "Email Reported": email_reported_col})
 
 
